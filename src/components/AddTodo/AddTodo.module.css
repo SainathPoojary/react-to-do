@@ -1,0 +1,46 @@
+.container {
+  width: 100%;
+  display: flex;
+}
+
+.input {
+  flex: 1;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: var(--taskflow-color-gray-200) 1px solid;
+  border-radius: 10px 0 0 10px;
+  width: 100%;
+  min-width: 100px;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.button {
+  padding: 18px 40px;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: var(--taskflow-color-blue);
+  color: var(--taskflow-color-white);
+  border: none;
+  cursor: pointer;
+  border-radius: 0 10px 10px 0;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: var(--taskflow-color-blue-dark);
+}
+
+@media (max-width: 768px) {
+  .input {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+
+  .button {
+    padding: 18px 30px;
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,24 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.completedContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.completedHeading {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--taskflow-color-gray-400);
+}
+
+.noTodos {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--taskflow-color-gray-400);
+  text-align: center;
+}

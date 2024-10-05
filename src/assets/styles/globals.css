@@ -1,0 +1,37 @@
+@import-normalize;
+
+:root {
+  --taskflow-color-gray-100: #f7f7f7;
+  --taskflow-color-gray-200: #dadada;
+  --taskflow-color-gray-300: #6e6e6e;
+  --taskflow-color-gray-400: #4d4d4d;
+  --taskflow-color-black: #111111;
+  --taskflow-color-white: #ffffff;
+  --taskflow-color-blue: #2a60e4;
+  --taskflow-color-blue-dark: #2748d9;
+  --taskflow-color-red: #ff4d4f;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  background-color: var(--taskflow-color-gray-100);
+  color: var(--taskflow-color-black);
+  font-family: sans-serif;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
