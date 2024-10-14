@@ -30,13 +30,35 @@ export const TodoProvider = ({ children }) => {
   const [todos, setTodos] = useState([]);
   const [error, setError] = useState(null);
 
+  /**
+   * Checks if localStorage is supported.
+   *
+   * @returns {boolean} - Returns true if localStorage is supported; otherwise false.
+   */
+  const checkLocalStorageSupport = () => {
+    try {
+      const testKey = '__localStorageTest__';
+      localStorage.setItem(testKey, testKey);
+      localStorage.removeItem(testKey);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  };
+
   // Initialize todos from Local Storage on component mount
   useEffect(() => {
-    try {
-      const initialTodos = getTodos();
-      setTodos(initialTodos);
-    } catch (err) {
-      setError(err.message);
+    if (checkLocalStorageSupport()) {
+      try {
+        const initialTodos = getTodos();
+        setTodos(initialTodos);
+      } catch (err) {
+        setError(err.message);
+      }
+    } else {
+      setError(
+        'Local storage is not supported in this browser. Data will not be saved.'
+      );
     }
   }, []);
 
@@ -46,6 +68,11 @@ export const TodoProvider = ({ children }) => {
    * @param {Object} todo - The todo object to add.
    */
   const addTodo = (todo) => {
+    if (!checkLocalStorageSupport()) {
+      setTodos((prevTodos) => [...prevTodos, todo]);
+      return;
+    }
+
     try {
       addTodoService(todo);
       setTodos((prevTodos) => [...prevTodos, todo]);
@@ -60,6 +87,15 @@ export const TodoProvider = ({ children }) => {
    * @param {Object} updatedTodo - The todo object with updated properties.
    */
   const updateTodo = (updatedTodo) => {
+    if (!checkLocalStorageSupport()) {
+      setTodos((prevTodos) =>
+        prevTodos.map((todo) =>
+          todo.id === updatedTodo.id ? { ...todo, ...updatedTodo } : todo
+        )
+      );
+      return;
+    }
+
     try {
       updateTodoService(updatedTodo);
       setTodos((prevTodos) =>
@@ -78,6 +114,11 @@ export const TodoProvider = ({ children }) => {
    * @param {number} id - The ID of the todo to remove.
    */
   const removeTodo = (id) => {
+    if (!checkLocalStorageSupport()) {
+      setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+      return;
+    }
+
     try {
       removeTodoService(id);
       setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));

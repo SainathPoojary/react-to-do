@@ -1,15 +1,18 @@
-@import-normalize;
-
 :root {
   --taskflow-color-gray-100: #f7f7f7;
   --taskflow-color-gray-200: #dadada;
-  --taskflow-color-gray-300: #6e6e6e;
-  --taskflow-color-gray-400: #4d4d4d;
+  --taskflow-color-gray-300: #b5b5b5;
+  --taskflow-color-gray-400: #5c5c5c;
+  --taskflow-color-gray-500: #4d4d4d;
   --taskflow-color-black: #111111;
   --taskflow-color-white: #ffffff;
   --taskflow-color-blue: #2a60e4;
   --taskflow-color-blue-dark: #2748d9;
-  --taskflow-color-red: #ff4d4f;
+  --taskflow-color-blue-light: rgb(240, 244, 255);
+  --taskflow-color-red: #d52023;
+  --taskflow-color-red-dark: #e63e3f;
+  --taskflow-color-black-rgba-50: rgba(0, 0, 0, 0.5);
+  --taskflow-color-black-rgba-20: rgba(0, 0, 0, 0.2);
 }
 
 * {
@@ -23,6 +26,8 @@ body {
   background-color: var(--taskflow-color-gray-100);
   color: var(--taskflow-color-black);
   font-family: sans-serif;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .visually-hidden {

@@ -44,6 +44,16 @@
   color: var(--taskflow-color-blue);
   cursor: pointer;
   height: 31.5px;
+  width: 31.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.editButton:hover,
+.deleteButton:hover {
+  background-color: var(--taskflow-color-blue-light);
 }
 
 .editIcon,
@@ -84,7 +94,7 @@
 }
 
 .cancelButton {
-  background-color: var(--taskflow-color-gray-300);
+  background-color: var(--taskflow-color-gray-400);
 }
 
 .cancelButton:hover {

@@ -54,7 +54,7 @@ const TodoEditView = ({ todo, setIsEditing }) => {
   return (
     <>
       <label className="visually-hidden" htmlFor={`edit-todo-${todo.id}`}>
-        Edit todo
+        {`Edit ${todo.text} todo`}
       </label>
       <input
         id={`edit-todo-${todo.id}`}
@@ -64,7 +64,6 @@ const TodoEditView = ({ todo, setIsEditing }) => {
         value={editedText}
         onChange={(e) => setEditedText(e.target.value)}
         onKeyDown={handleKeyDown}
-        aria-label={`Edit ${todo.text} todo`}
       />
       <div className={style.right}>
         <button

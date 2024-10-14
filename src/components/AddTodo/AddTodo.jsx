@@ -51,7 +51,6 @@ const AddTodo = () => {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Add a new todo"
-        aria-label="Add a new todo"
       />
       <button className={style.button} type="submit">
         Add

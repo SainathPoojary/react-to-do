@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
-import DeleteIcon from '../../../assets/images/delete.svg';
-import EditIcon from '../../../assets/images/edit.svg';
 import useTodoContext from '../../../hooks/useTodoContext';
+import DialogModal from '../../DialogModal/DialogModal';
+import DeleteIcon from '../../Icons/DeleteIcon';
+import EditIcon from '../../Icons/EditIcon';
 import style from '../TodoItem.module.css';
 
 /**
@@ -23,15 +25,26 @@ import style from '../TodoItem.module.css';
  */
 const TodoDefaultView = ({ todo, setIsEditing }) => {
   const { updateTodo, removeTodo } = useTodoContext();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Toggle the completion status of the todo item
   const toggleCompletion = () => {
     updateTodo({ ...todo, completed: !todo.completed });
   };
 
-  // Remove the todo item
+  // Open the delete confirmation modal
   const handleRemove = () => {
+    setIsModalOpen(true);
+  };
+
+  // Remove the todo item
+  const handleDeleteConfirm = () => {
     removeTodo(todo.id);
+  };
+
+  // Close the delete confirmation modal
+  const handleDeleteCancel = () => {
+    setIsModalOpen(false);
   };
 
   // Set the editing state to true
@@ -48,7 +61,7 @@ const TodoDefaultView = ({ todo, setIsEditing }) => {
             htmlFor={`todo-checkbox-${todo.id}`}
             className="visually-hidden"
           >
-            <span>Completed</span>
+            {`Mark ${todo.text} as ${todo.completed ? 'incomplete' : 'complete'}`}
           </label>
           <input
             className={style.checkbox}
@@ -56,7 +69,6 @@ const TodoDefaultView = ({ todo, setIsEditing }) => {
             type="checkbox"
             checked={todo.completed}
             onChange={toggleCompletion}
-            aria-label={`Mark ${todo.text} as ${todo.completed ? 'incomplete' : 'complete'}`}
           />
         </div>
 
@@ -72,7 +84,7 @@ const TodoDefaultView = ({ todo, setIsEditing }) => {
           onClick={handleEdit}
           aria-label={`Edit ${todo.text} todo`}
         >
-          <img src={EditIcon} alt="Edit Button" className={style.editIcon} />
+          <EditIcon width={19} height={19} />
         </button>
 
         {/* Delete Todo button */}
@@ -82,12 +94,17 @@ const TodoDefaultView = ({ todo, setIsEditing }) => {
           onClick={handleRemove}
           aria-label={`Delete ${todo.text} todo`}
         >
-          <img
-            src={DeleteIcon}
-            alt="Delete Button"
-            className={style.deleteIcon}
-          />
+          <DeleteIcon width={19} height={19} />
         </button>
+        <DialogModal
+          isOpen={isModalOpen}
+          title="Delete Todo"
+          message={`Are you sure you want to delete the todo "${todo.text}"?`}
+          onConfirm={handleDeleteConfirm}
+          onCancel={handleDeleteCancel}
+          confirmText="Delete"
+          cancelText="Cancel"
+        />
       </div>
     </>
   );

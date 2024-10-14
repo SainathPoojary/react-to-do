@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  overflow-y: auto;
+  max-height: 60vh;
 }
 
 .completedContainer {
@@ -21,4 +23,10 @@
   font-weight: 500;
   color: var(--taskflow-color-gray-400);
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  .list {
+    max-height: 70vh;
+  }
 }
